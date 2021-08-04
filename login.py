@@ -19,13 +19,12 @@ class Login(QQuickView):
 
         self.setResizeMode(QQuickView.SizeRootObjectToView)
 
-        login_view_file = Path(__file__).parent / "login.qml"
-        self.setSource(QUrl.fromLocalFile(os.fspath(login_view_file.resolve())))
+        self.login_view_file = Path(__file__).parent / "login.qml"
+        self.editor_view_file = Path(__file__).parent / "editor.qml"
+        self.setSource(QUrl.fromLocalFile(os.fspath(self.login_view_file.resolve())))
 
 
-        self.root_win = self.rootObject()
-        self.page = self.root_win.childItems()[0]
-        self.column = self.page.childItems()[0]
+        self.column = self.rootObject()
 
         self.findLoginFields(self.column)
         self.login_button.clicked.connect(self.setCreds)
@@ -34,6 +33,8 @@ class Login(QQuickView):
         self.email = self.email_field.property("text")
         self.password = self.password_field.property("text")
         self.smtp = self.smtp_field.property("text")
+
+        self.setSource(QUrl.fromLocalFile(os.fspath(self.editor_view_file.resolve())))
 
 
     def findLoginFields(self, parent):
