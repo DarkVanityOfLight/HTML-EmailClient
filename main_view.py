@@ -9,7 +9,7 @@ from PySide6.QtCore import QUrl, QObject
 
 
 
-class Login(QQuickView):
+class MainView(QQuickView):
     email = ""
     password = ""
     smtp = ""
