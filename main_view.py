@@ -37,8 +37,22 @@ class MainView(QQuickView):
         self.smtp_field = parent.findChild(QObject, "smtpField")
         self.login_button = parent.findChild(QObject, "loginButton")
 
+    def findEditorFields(self, parent):
+        self.editor = parent.findChild(QObject, "textEditor")
+        self.display = parent.findChild(QObject, "textDisplay")
+
+    def transferText(self):
+        to_transfer = self.editor.property("text")
+        self.display.setProperty("text", to_transfer)
+
+
     def makeEditor(self):
         self.setSource(QUrl.fromLocalFile(os.fspath(self.editor_view_file.resolve())))
+
+        self.root_item = self.rootObject()
+        self.findEditorFields(self.root_item)
+        self.editor.textChanged.connect(self.transferText)
+
 
     def makeLogin(self):
         self.setSource(QUrl.fromLocalFile(os.fspath(self.login_view_file.resolve())))
