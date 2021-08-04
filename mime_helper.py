@@ -10,7 +10,7 @@ def create_plain_part(text):
 def create_mixed_multipart(*args):
     return MIMEMultipart(_subparts=args)
 
-def create_alternative_multipart(*args)
+def create_alternative_multipart(*args):
     return MIMEMultipart(_subparts=args, _subtype="alternative")
 
 if __name__ == "__main__":
