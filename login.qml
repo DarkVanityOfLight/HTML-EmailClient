@@ -93,6 +93,14 @@ ColumnLayout {
         placeholderText: qsTr("SMTP Server")
     }
 
+    Text{
+        id: errorText
+        objectName: "errorText"
+        visible: false
+        text: qsTr("Foo")
+        color: "#dc143c"
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+    }
 
     Button {
         id: loginButton
