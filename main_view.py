@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton
 from PySide6.QtQuick import QQuickView, QQuickItem
 from PySide6.QtCore import QUrl, QObject
 
-
+from send_email import *
 
 
 class MainView(QQuickView):
@@ -29,13 +29,37 @@ class MainView(QQuickView):
         self.password = self.password_field.property("text")
         self.smtp = self.smtp_field.property("text")
 
-        self.makeEditor()
+        if self.handle_smtp_login():
+            self.makeEditor()
+
+    def handle_smtp_login(self):
+        try:
+            server = create_server(self.smtp)
+        except Exception as e:
+            self.handle_server_creation_error(e)
+            return False
+        try:
+            login_to_smtp(server, self.email, self.password)
+        except Exception as e:
+            self.handle_login_error(e)
+            return False
+
+        return True
+
+    def handle_login_error(self, e):
+        self.error_text.setProperty("visible", True)
+        self.error_text.setProperty("text", "Incorrect username or password!")
+
+    def handle_server_creation_error(self, e):
+        self.error_text.setProperty("visible", True)
+        self.error_text.setProperty("text", "Incorrect SMTP server!")
 
     def findLoginFields(self, parent):
         self.email_field = parent.findChild(QObject, "emailField")
         self.password_field = parent.findChild(QObject, "passwordField")
         self.smtp_field = parent.findChild(QObject, "smtpField")
         self.login_button = parent.findChild(QObject, "loginButton")
+        self.error_text = parent.findChild(QObject, "errorText")
 
     def findEditorFields(self, parent):
         self.editor = parent.findChild(QObject, "textEditor")
