@@ -1,9 +1,9 @@
 import smtplib, ssl
 from email.message import EmailMessage
 
-port = 465
 
-
+def get_default_port():
+    return 465
 
 def send(sender_email, password, receiver_email, server, message):
     context = ssl.create_default_context()
@@ -15,4 +15,16 @@ def send(sender_email, password, receiver_email, server, message):
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
 
+def create_server(address):
+    server = smtplib.SMTP(address)
+    return server
 
+def login_to_smtp(server, email, password):
+    context = ssl.create_default_context()
+
+    server.starttls()
+
+    server.login(email, password)
+
+def send_message_to_smtp(server, message):
+    server.send_message(message)
