@@ -82,6 +82,7 @@ ColumnLayout {
     TextField {
         id: passwordField
         objectName: "passwordField"
+        echoMode: TextInput.Password
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         placeholderText: qsTr("Password")
     }
