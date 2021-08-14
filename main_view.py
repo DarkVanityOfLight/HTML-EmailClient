@@ -8,6 +8,8 @@ from PySide2.QtCore import QUrl, QObject, Qt
 
 from send_email import *
 
+import create_message
+
 
 class MainView(QQuickView):
     email = ""
@@ -44,6 +46,8 @@ class MainView(QQuickView):
             self.handle_login_error(e)
             return False
 
+
+        self.server = server
         return True
 
     def handle_login_error(self, e):
@@ -64,6 +68,9 @@ class MainView(QQuickView):
     def findEditorFields(self, parent):
         self.editor = parent.findChild(QObject, "textEditor")
         self.display = parent.findChild(QObject, "textDisplay")
+        self.to_field = parent.findChild(QObject, "toField")
+        self.subject_field = parent.findChild(QObject, "subjectField")
+        self.send_button = parent.findChild(QObject, "sendButton")
 
     def transferText(self):
         to_transfer = self.editor.property("text")
@@ -76,6 +83,7 @@ class MainView(QQuickView):
         self.root_item = self.rootObject()
         self.findEditorFields(self.root_item)
         self.editor.textChanged.connect(self.transferText)
+        self.send_button.clicked.connect(self.prep_email)
 
 
     def makeLogin(self):
@@ -85,6 +93,17 @@ class MainView(QQuickView):
 
         self.findLoginFields(self.column)
         self.login_button.clicked.connect(self.setCreds)
+
+    def prep_email(self):
+        msg = create_message.create_new_message()
+        create_message.set_plain_text(msg, "placeholderText")
+        create_message.set_html_alt(msg, self.editor.property("text"))
+        msg["Subject"] = self.subject_field.property("text")
+        msg["To"] = self.to_field.property("text")
+        msg["From"] = self.email
+
+        send_message_to_smtp(self.server, msg)
+
 
     def debug_call(self):
         print("Foo")
