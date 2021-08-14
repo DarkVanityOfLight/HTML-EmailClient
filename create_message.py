@@ -2,7 +2,7 @@ from email.message import EmailMessage
 
 
 def create_new_message():
-    return EmailMessage
+    return EmailMessage()
 
 def set_plain_text(msg, plain_text):
     msg.set_content(plain_text)
