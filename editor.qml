@@ -1,30 +1,78 @@
 import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.11
+import QtWebEngine 1.10
 
-Item{
-    TextEdit {
-        id: textEdit
-        objectName: "textEditor"
-        x: 8
-        y: 8
-        width: 315
-        height: 464
-        text: ""
-        font.pixelSize: 12
-        wrapMode: Text.Wrap
-        textFormat: Text.PlainText
+ColumnLayout{
+
+  Row {
+      id: rows
+      Layout.fillWidth: true
+      height: 50
+
+
+      TextField {
+          id: toField
+          placeholderText: qsTr("To")
+      }
+
+      TextField {
+          id: subjectField
+          placeholderText: qsTr("Subject")
+      }
+  }
+
+  Row{
+    id: editorRow
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+
+    Rectangle {
+        id: rectangle
+        width: parent.width/2
+        height: parent.height
+        color: "#00000000"
+        border.color: "black"
+
+        TextArea {
+            id: textEdit
+            objectName: "textEditor"
+            anchors.fill: parent
+            font.pixelSize: 12
+            wrapMode: Text.Wrap
+            placeholderTextColor: "#000000"
+            placeholderText: "Message here"
+            textFormat: Text.PlainText
+
+        }
+
     }
 
-    Text {
-        id: text1
-        objectName: "textDisplay"
-        x: 329
-        y: 8
-        width: 315
-        height: 464
-        text: qsTr("")
-        font.pixelSize: 12
-        textFormat: Text.RichText
+    Rectangle{
+        id: rectangle1
+        width: parent.width/2
+        height: parent.height
+        color: "#00000000"
+        border.color: "black"
+
+        WebEngineView {
+            id: webView
+            property var foo: 42
+            objectName: "textDisplay"
+            anchors.fill: parent
+            url: ""
+        }
     }
+  }
+
+  Button {
+      id: button
+      height: 50
+      text: qsTr("Send")
+      Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+      onClicked: view.debug_call()
+  }
+
 }
 
 /*##^##
