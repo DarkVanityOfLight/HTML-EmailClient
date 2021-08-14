@@ -13,11 +13,13 @@ ColumnLayout{
 
       TextField {
           id: toField
+          objectName: "toField"
           placeholderText: qsTr("To")
       }
 
       TextField {
           id: subjectField
+          objectName: "subjectField"
           placeholderText: qsTr("Subject")
       }
   }
@@ -66,11 +68,11 @@ ColumnLayout{
   }
 
   Button {
-      id: button
+      id: sendButton
+      objectName: "sendButton"
       height: 50
       text: qsTr("Send")
       Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-      onClicked: view.debug_call()
   }
 
 }
