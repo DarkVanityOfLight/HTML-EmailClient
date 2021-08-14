@@ -2,9 +2,9 @@
 import sys, os
 from pathlib import Path
 
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton
-from PySide6.QtQuick import QQuickView, QQuickItem
-from PySide6.QtCore import QUrl, QObject
+from PySide2.QtWidgets import QApplication, QWidget, QPushButton
+from PySide2.QtQuick import QQuickView, QQuickItem
+from PySide2.QtCore import QUrl, QObject, Qt
 
 from send_email import *
 
@@ -67,7 +67,7 @@ class MainView(QQuickView):
 
     def transferText(self):
         to_transfer = self.editor.property("text")
-        self.display.setProperty("text", to_transfer)
+        self.display.loadHtml(to_transfer, "")
 
 
     def makeEditor(self):
@@ -85,3 +85,6 @@ class MainView(QQuickView):
 
         self.findLoginFields(self.column)
         self.login_button.clicked.connect(self.setCreds)
+
+    def debug_call(self):
+        print("Foo")
