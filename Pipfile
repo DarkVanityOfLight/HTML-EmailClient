@@ -7,6 +7,7 @@ name = "pypi"
 PySide2 = "*"
 pyqtwebengine = "*"
 pyside2 = "*"
+html2text = "*"
 
 [dev-packages]
 

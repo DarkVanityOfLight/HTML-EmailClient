@@ -10,6 +10,8 @@ from send_email import *
 
 import create_message
 
+import html2text
+
 
 class MainView(QQuickView):
     email = ""
@@ -97,8 +99,11 @@ class MainView(QQuickView):
 
     def prep_email(self):
         msg = create_message.create_new_message()
-        create_message.set_plain_text(msg, "placeholderText")
-        create_message.set_html_alt(msg, self.editor.property("text"))
+
+        msg_text = self.editor.property("text")
+
+        create_message.set_plain_text(msg, html2text.html2text(msg_text))
+        create_message.set_html_alt(msg, msg_text)
         msg["Subject"] = self.subject_field.property("text")
         msg["To"] = self.to_field.property("text")
         msg["From"] = self.email
