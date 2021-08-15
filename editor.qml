@@ -5,22 +5,24 @@ import QtWebEngine 1.10
 
 ColumnLayout{
 
-  Row {
+  Column {
       id: rows
       Layout.fillWidth: true
-      height: 50
+      spacing: 2
 
 
       TextField {
           id: toField
           objectName: "toField"
           placeholderText: qsTr("To")
+          width: parent.width
       }
 
       TextField {
           id: subjectField
           objectName: "subjectField"
           placeholderText: qsTr("Subject")
+          width: parent.width
       }
   }
 
