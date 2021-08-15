@@ -16,6 +16,7 @@ ColumnLayout{
           objectName: "toField"
           placeholderText: qsTr("To")
           width: parent.width
+          selectByMouse: true
       }
 
       TextField {
@@ -23,6 +24,7 @@ ColumnLayout{
           objectName: "subjectField"
           placeholderText: qsTr("Subject")
           width: parent.width
+          selectByMouse: true
       }
   }
 
@@ -47,6 +49,7 @@ ColumnLayout{
             placeholderTextColor: "#000000"
             placeholderText: "Message here"
             textFormat: Text.PlainText
+            selectByMouse: true
 
         }
 
