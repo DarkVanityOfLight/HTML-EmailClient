@@ -54,59 +54,61 @@ import QtQuick.Layouts 1.11
 
 ColumnLayout {
     id: columnLayout
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.top: parent.top
-    spacing: 5
 
-    Text {
-        id: title
-        width: 229
-        height: 78
-        text: qsTr("Login")
-        font.pixelSize: 50
-        horizontalAlignment: Text.AlignHCenter
-        fontSizeMode: Text.Fit
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        minimumPixelSize: 16
+    Column{
+      Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+      spacing: 10
+      width: parent.width
 
+      Text {
+          id: title
+          width: 229
+          text: qsTr("Login")
+          font.pixelSize: 50
+          horizontalAlignment: Text.AlignHCenter
+          fontSizeMode: Text.Fit
+          minimumPixelSize: 16
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      TextField {
+          id: emailField
+          objectName: "emailField"
+          placeholderText: qsTr("Email")
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      TextField {
+          id: passwordField
+          objectName: "passwordField"
+          echoMode: TextInput.Password
+          placeholderText: qsTr("Password")
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      TextField {
+          id: smtpField
+          objectName: "smtpField"
+          placeholderText: qsTr("SMTP Server")
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      Text{
+          id: errorText
+          objectName: "errorText"
+          visible: false
+          text: qsTr("Foo")
+          color: "#dc143c"
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      Button {
+          id: loginButton
+          objectName: "loginButton"
+          text: qsTr("Login")
+          anchors.horizontalCenter: parent.horizontalCenter
+      }
     }
 
-    TextField {
-        id: emailField
-        objectName: "emailField"
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        placeholderText: qsTr("Email")
-    }
 
-    TextField {
-        id: passwordField
-        objectName: "passwordField"
-        echoMode: TextInput.Password
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        placeholderText: qsTr("Password")
-    }
-
-    TextField {
-        id: smtpField
-        objectName: "smtpField"
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        placeholderText: qsTr("SMTP Server")
-    }
-
-    Text{
-        id: errorText
-        objectName: "errorText"
-        visible: false
-        text: qsTr("Foo")
-        color: "#dc143c"
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-    }
-
-    Button {
-        id: loginButton
-        objectName: "loginButton"
-        text: qsTr("Login")
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-    }
 }
