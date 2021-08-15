@@ -76,6 +76,7 @@ ColumnLayout {
           objectName: "emailField"
           placeholderText: qsTr("Email")
           anchors.horizontalCenter: parent.horizontalCenter
+          selectByMouse: true
       }
 
       TextField {
@@ -91,6 +92,7 @@ ColumnLayout {
           objectName: "smtpField"
           placeholderText: qsTr("SMTP Server")
           anchors.horizontalCenter: parent.horizontalCenter
+          selectByMouse: true
       }
 
       Text{
