@@ -74,7 +74,6 @@ ColumnLayout{
             id: webView
             property var foo: 42
             objectName: "textDisplay"
-            anchors.fill: parent
             url: ""
         }
     }
@@ -85,7 +84,7 @@ ColumnLayout{
       objectName: "infoText"
       visible: false
       text: qsTr("Foo")
-      anchors.horizontalCenter: parent.horizontalCenter
+      Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
   }
 
   Button {
