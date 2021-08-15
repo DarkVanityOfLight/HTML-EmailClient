@@ -40,17 +40,25 @@ ColumnLayout{
         color: "#00000000"
         border.color: "black"
 
-        TextArea {
-            id: textEdit
-            objectName: "textEditor"
-            anchors.fill: parent
-            font.pixelSize: 12
-            wrapMode: Text.Wrap
-            placeholderTextColor: "#000000"
-            placeholderText: "Message here"
-            textFormat: Text.PlainText
-            selectByMouse: true
+        ScrollView{
+          id: textScroll
+          clip: true
+          width: parent.width
+          height: parent.height
 
+          TextArea {
+              id: textEdit
+              width: parent.width
+              height: parent.height
+              objectName: "textEditor"
+              font.pixelSize: 12
+              wrapMode: Text.Wrap
+              placeholderTextColor: "#000000"
+              placeholderText: "Message here"
+              textFormat: Text.PlainText
+              selectByMouse: true
+
+          }
         }
 
     }
