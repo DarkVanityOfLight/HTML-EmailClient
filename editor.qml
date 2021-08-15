@@ -80,6 +80,14 @@ ColumnLayout{
     }
   }
 
+  Text{
+      id: errorText
+      objectName: "infoText"
+      visible: false
+      text: qsTr("Foo")
+      anchors.horizontalCenter: parent.horizontalCenter
+  }
+
   Button {
       id: sendButton
       objectName: "sendButton"

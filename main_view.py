@@ -71,6 +71,7 @@ class MainView(QQuickView):
         self.to_field = parent.findChild(QObject, "toField")
         self.subject_field = parent.findChild(QObject, "subjectField")
         self.send_button = parent.findChild(QObject, "sendButton")
+        self.info_text = parent.findChild(QObject, "infoText")
 
     def transferText(self):
         to_transfer = self.editor.property("text")
@@ -102,7 +103,16 @@ class MainView(QQuickView):
         msg["To"] = self.to_field.property("text")
         msg["From"] = self.email
 
-        send_message_to_smtp(self.server, msg)
+        try:
+            send_message_to_smtp(self.server, msg)
+            self.info_text.setProperty("color", "#2596be")
+            self.info_text.setProperty("visible", True)
+            self.info_text.setProperty("text", "Email send successfully!")
+
+        except Exception as e:
+            self.info_text.setProperty("color", "#dc143c")
+            self.info_text.setProperty("visible", True)
+            self.info_text.setProperty("text", getattr(e, 'message', repr(e)))
 
 
     def debug_call(self):
